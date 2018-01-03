@@ -31,5 +31,5 @@ Return:
 ## How it will work
 
 Create an API that sends the question and dataset to use to the client.
-The user should send back the answer to the API.
-The system should keep track of the questions completed by a user.
+The client should send back the answer to the API.
+The system should keep track of the questions completed by a client.
