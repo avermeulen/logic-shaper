@@ -1,6 +1,6 @@
 # logic-shaper
 
-Develop your logical thinking skills by solving programming puzzles
+Develop your logical thinking skills by solving programming puzzles based on shapes. Write the code for the algorithms that can answer the questions below.
 
 ## Based on three different shapes with different colors. 
 
