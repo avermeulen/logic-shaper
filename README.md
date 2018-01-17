@@ -2,6 +2,8 @@
 
 Develop your logical thinking skills by solving programming puzzles based on shapes. Write the code for the algorithms that can answer the questions below.
 
+A screen should look like this: https://avermeulen.github.io/logic-shaper/
+
 ## Based on three different shapes with different colors. 
 
 ### Easy
