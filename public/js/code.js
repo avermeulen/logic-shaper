@@ -35,13 +35,7 @@
 
     }
 
-    var createShape = function(){
-
-        var currentShape = {
-            type : randomShape(),
-            color : randomColor(),
-            //number :         
-        };
+    var createShapeElement = function(currentShape){
 
         let elem = document.createElement('div');
         elem.classList.add('shape');
@@ -58,47 +52,67 @@
         return elem;
     }
 
-    var createShapes = function(){
-        var shapes = document.querySelector('.shapes');
-        shapes.innerHTML = "";
+    function createShape(){
+        var currentShape = {
+            type : randomShape(),
+            color : randomColor(),
+            //number :         
+        };
+        return currentShape;
+    }
+
+    function createShapes(){
+        var shapes = [];
+        var shapesElem = document.querySelector('.shapes');
+        shapesElem.innerHTML = "";
         for (var i = 0; i < 125; i++) {
             let shape = createShape();
-            shapes.appendChild(shape);
+            shapes.push(shape);
+            shapesElem.appendChild(createShapeElement(shape));
         }
+        return shapes;
     }
 
 
     document.addEventListener('DOMContentLoaded', function(){
         //
-        createShapes();
+        var dataset = createShapes();
 
         let refreshButton = document.querySelector('.refresh');
         refreshButton.addEventListener('click', function(){
-            createShapes()
+            dataset = createShapes()
         });
 
         let executeButton = document.querySelector('.execute');
         let code = document.querySelector('.code');
-        executeButton.addEventListener('click', function(){
-            console.log(code.value);
 
-            var theCode = code.value;
+        var codeTextArea = document.querySelector(".code");
+        var editor = CodeMirror.fromTextArea(codeTextArea, {
+            lineNumbers: true,
+            matchBrackets : true,
+            mode : 'javascript',
+            theme : 'monokai'
+        });
+
+        var consoleArea = document.querySelector('.console');
+
+        console.log = function(msg){
+            consoleArea.innerHTML = JSON.stringify(msg);
+        }
+
+        executeButton.addEventListener('click', function(){
+            //console.log(codeTextArea.getValue());
+
+            var theCode = editor.getValue();
 
             //createShapes()
-            var execCode = new Function(theCode);
-            execCode();
+            //var execCode = new Function(theCode);
+            //execCode(dataset);
+            eval(theCode);
         });
 
 
 
-    });
-
-    var codeTextArea = document.querySelector(".code");
-    var editor = CodeMirror.fromTextArea(codeTextArea, {
-        lineNumbers: true,
-        matchBrackets : true,
-        mode : 'javascript',
-        theme : 'monokai'
     });
 
     // editor.setOption('mode', 'javascript');

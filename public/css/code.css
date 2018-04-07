@@ -73,7 +73,6 @@ button {
     text-align: center;
     font-weight : lighter;
     border-radius: 2px;
-    text-align:
 }
 
 .circle {
@@ -86,6 +85,26 @@ button {
     width : 960px;
     height: 100%;
     margin : auto;
+}
+
+.logic {
+}
+
+.console {
+  background: #000000;
+  color : lime;
+  height: 19em;
+  display: inline-block;
+  vertical-align: top;
+  padding : 1em;
+  font-family : monospace, monospace;
+  font-size : 1em;
+  width : 100%;
+  overflow: scroll;
+}
+
+.logic {
+  margin-bottom: 1em;
 }
 
 .shapesBlock{
