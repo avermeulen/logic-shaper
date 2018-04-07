@@ -1,40 +1,5 @@
 (function(){
 
-    var randomShape = function(){
-        var randomNumber = Math.random() * 100;
-
-        if (randomNumber < 33){
-            return 'triangle'
-        }
-        else if (randomNumber > 33 && randomNumber < 66){
-            return 'circle'
-        }
-
-        return 'square';
-    }
-
-    var randomColor = function(){
-        var randomNumber = Math.random() * 100;
-
-        if (randomNumber < 21){
-            return 'orange'
-        }
-        else if (randomNumber > 21 && randomNumber < 33){
-            return 'green'
-        }
-        else if (randomNumber > 33 && randomNumber < 66){
-            return 'red'
-        }
-        else if (randomNumber > 66 && randomNumber < 81){
-            return 'blue'
-        }
-        else {
-          return "yellow"
-        }
-
-
-    }
-
     var createShapeElement = function(currentShape){
 
         let elem = document.createElement('div');
@@ -52,15 +17,6 @@
         return elem;
     }
 
-    function createShape(){
-        var currentShape = {
-            type : randomShape(),
-            color : randomColor(),
-            //number :         
-        };
-        return currentShape;
-    }
-
     function createShapes(){
         var shapes = [];
         var shapesElem = document.querySelector('.shapes');
@@ -76,11 +32,11 @@
 
     document.addEventListener('DOMContentLoaded', function(){
         //
-        var dataset = createShapes();
+        var shapes = createShapes();
 
         let refreshButton = document.querySelector('.refresh');
         refreshButton.addEventListener('click', function(){
-            dataset = createShapes()
+            shapes = createShapes();
         });
 
         let executeButton = document.querySelector('.execute');
@@ -94,6 +50,21 @@
             theme : 'monokai'
         });
 
+        let instructions = document.querySelector(".instructionText");
+        let showInstructions = document.querySelector('.showInstructions');
+        let instructionsEditor = CodeMirror.fromTextArea(instructions, {
+            lineNumbers: true,
+            matchBrackets : true,
+            mode : 'markdown',
+            theme : 'monokai'
+        });
+
+        let showButton = document.querySelector('.show');
+        showButton.addEventListener('click', function(){
+            //shapes = createShapes();
+            showInstructions.innerHTML = marked(instructionsEditor.getValue());
+        });
+
         var consoleArea = document.querySelector('.console');
 
         console.log = function(msg){
@@ -101,21 +72,9 @@
         }
 
         executeButton.addEventListener('click', function(){
-            //console.log(codeTextArea.getValue());
-
             var theCode = editor.getValue();
-
-            //createShapes()
-            //var execCode = new Function(theCode);
-            //execCode(dataset);
             eval(theCode);
         });
-
-
-
     });
-
     // editor.setOption('mode', 'javascript');
-
-
 })();
