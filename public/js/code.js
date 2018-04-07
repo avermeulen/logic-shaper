@@ -93,6 +93,15 @@
 
     });
 
+    var codeTextArea = document.querySelector(".code");
+    var editor = CodeMirror.fromTextArea(codeTextArea, {
+        lineNumbers: true,
+        matchBrackets : true,
+        mode : 'javascript',
+        theme : 'monokai'
+    });
+
+    // editor.setOption('mode', 'javascript');
 
 
 })();
