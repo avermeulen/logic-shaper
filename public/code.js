@@ -10,23 +10,58 @@
             return 'circle'
         }
 
-        return ''
+        return 'square';
+    }
+
+    var randomColor = function(){
+        var randomNumber = Math.random() * 100;
+
+        if (randomNumber < 21){
+            return 'orange'
+        }
+        else if (randomNumber > 21 && randomNumber < 33){
+            return 'green'
+        }
+        else if (randomNumber > 33 && randomNumber < 66){
+            return 'red'
+        }
+        else if (randomNumber > 66 && randomNumber < 81){
+            return 'blue'
+        }
+        else {
+          return "yellow"
+        }
+
+
     }
 
     var createShape = function(){
+
+        var currentShape = {
+            type : randomShape(),
+            color : randomColor(),
+            //number :         
+        };
+
         let elem = document.createElement('div');
         elem.classList.add('shape');
-        var shape = randomShape();
+        var shape = currentShape.type;
         if (shape !== ''){
             elem.classList.add(shape);
         }
+
+        if (shape === 'triangle'){
+            elem.classList.add(shape);
+            elem.classList.add(currentShape.color + "-triangle");
+        }
+        elem.classList.add(currentShape.color);
         return elem;
     }
 
     var createShapes = function(){
         var shapes = document.querySelector('.shapes');
         shapes.innerHTML = "";
-        for (var i = 0; i < 110; i++) {
+        for (var i = 0; i < 125; i++) {
             let shape = createShape();
             shapes.appendChild(shape);
         }

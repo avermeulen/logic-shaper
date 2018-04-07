@@ -1,0 +1,104 @@
+body {
+    font-family: Arial;
+}
+
+button {
+    padding : 0.5em;
+}
+
+.blue{
+  background-color: dodgerblue;
+}
+
+.red {
+  background-color: indianred;
+}
+
+.yellow {
+  background-color: gold;
+}
+
+.green{
+  background-color: lightgreen;
+}
+
+.orange{
+  background-color: orange;
+}
+
+.shapes {
+    display: inline-block;
+    background-color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding : 1em;
+    text-align: center;
+    font-weight: bold;
+    border : 0.25em solid;
+    border-radius: 1em;
+}
+
+
+/* Triangle */
+
+.blue-triangle {
+  border-bottom: 2.0em solid dodgerblue;
+}
+
+.red-triangle {
+  border-bottom: 2.0em solid indianred;
+}
+
+.yellow-triangle {
+  border-bottom: 2.0em solid yellow;
+}
+
+.green-triangle {
+  border-bottom: 2.0em solid lightgreen;
+}
+
+.orange-triangle {
+  border-bottom: 2.0em solid orange;
+}
+
+
+/* Triangle ends */
+
+.shape {
+    width : 2em;
+    height : 2em;
+    padding : 0.25em;
+    margin : 0.25em;
+    float : left;
+    text-align: center;
+    font-weight : lighter;
+    border-radius: 2px;
+    text-align:
+}
+
+.circle {
+    border-radius: 50%;
+
+}
+
+.container {
+
+    width : 960px;
+    height: 100%;
+    margin : auto;
+}
+
+.shapesBlock{
+    margin-bottom: 1em;
+}
+
+.triangle{
+
+    width : 0em;
+    height : 0em;
+    padding : 0em;
+    border-left: 1.25em solid transparent;
+    border-right: 1.25em solid transparent;
+    background-color: #FFF;
+
+}

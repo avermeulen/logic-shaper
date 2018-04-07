@@ -1,0 +1,25 @@
+{
+  "name": "logic-shaper",
+  "version": "1.0.0",
+  "description": "Develop your logical thinking skills by solving programming puzzles based on shapes. Write the code for the algorithms that can answer the questions below.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avermeulen/logic-shaper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avermeulen/logic-shaper/issues"
+  },
+  "homepage": "https://github.com/avermeulen/logic-shaper#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  }
+}
