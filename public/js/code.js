@@ -1,5 +1,7 @@
 (function(){
 
+    let shapes = [];
+
     var createShapeElement = function(currentShape){
 
         let elem = document.createElement('div');
@@ -25,7 +27,9 @@
     }
 
     function createShapes(){
-        var shapes = [];
+        
+        // create an empty list of shapes
+        shapes = [];
         var shapesElem = document.querySelector('.shapes');
         shapesElem.innerHTML = "";
 
@@ -34,7 +38,7 @@
         for (var i = 0; i < shapeCount; i++) {
             let shape = createShape();
             shapes.push(shape);
-            storeShape(shape);
+            // storeShape(shape);
             shapesElem.appendChild(createShapeElement(shape));
         }
 
@@ -56,10 +60,6 @@
         db.transaction(function (tx) {
             tx.executeSql(sql, [shape.type, shape.color, shape.size, shape.number]);
         });
-
-
-
-
     }
 
 
@@ -74,7 +74,7 @@
         });
 
         let executeButton = document.querySelector('.execute');
-        let code = document.querySelector('.code');
+        // let code = document.querySelector('.code');
 
         var codeTextArea = document.querySelector(".code");
         var editor = CodeMirror.fromTextArea(codeTextArea, {
@@ -83,6 +83,10 @@
             mode : 'javascript',
             theme : 'monokai'
         });
+
+        const storedCode = localStorage['code'];
+        editor.getDoc().setValue(storedCode ? storedCode : '');
+        
 
         // editor.on('change', function() {
         //     const notAllowedFunctionsUsed = notAllowed.some((n) => theCode.indexOf(n) !== -1 );
@@ -126,6 +130,9 @@
                 // alert(editor);
                 let theCode = editor.getValue();
                 eval(theCode);
+
+                localStorage['code'] = theCode;
+
                 // let shapes = document.querySelectorAll('.shape');
                 
                 
