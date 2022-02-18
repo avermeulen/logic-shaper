@@ -1,5 +1,19 @@
 function createShape(){
-    var randomShape = function(){
+
+    const randomSize = function() {
+        var randomNumber = Math.random() * 2;
+        
+        if (randomNumber > 1 && randomNumber < 2){
+            return 'medium'
+        }
+        else if (randomNumber > 2 && randomNumber < 3){
+            return 'large'
+        }
+
+        return 'small';
+    }
+
+    const randomShape = function(){
         var randomNumber = Math.random() * 100;
         if (randomNumber < 33){
             return 'triangle'
@@ -10,7 +24,7 @@ function createShape(){
         return 'square';
     };
 
-    var randomColor = function(){
+    const randomColor = function(){
         var randomNumber = Math.random() * 100;
 
         if (randomNumber < 21){
@@ -33,7 +47,8 @@ function createShape(){
     var currentShape = {
         type : randomShape(),
         color : randomColor(),
-        //number :         
+        number : Math.floor(Math.random() * 10),
+        size : randomSize()
     };
     return currentShape;
 }

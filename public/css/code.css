@@ -77,7 +77,16 @@ button {
 
 .circle {
     border-radius: 50%;
+}
 
+.medium {
+  width : 3em;
+  height : 3em;
+}
+
+.large {
+  width : 4em;
+  height : 4em;
 }
 
 .container {
@@ -120,4 +129,28 @@ button {
     border-right: 1.25em solid transparent;
     background-color: #FFF;
 
+}
+
+.number {
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  text-align: center
+}
+
+.circle > .number {
+    margin-top: 0.3em;
+    margin-left: -0.1em;
+    text-align: center;
+}
+
+.triangle .number {
+  margin-top: 0.75em;
+  margin-left: -0.25em;
+  text-align: center;
+}
+
+.square .number {
+  margin-top: 0.25em;
+  margin-left: -0.10em;
+  text-align: center;
 }
