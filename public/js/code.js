@@ -3,9 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let shapes = [];
     let functioName = "";
+    let puzzleId = null;
     // let instructions = "";
 
     function setPuzzleData(data) {
+        puzzleId = data.puzzleId
         functioName = data.function_name;
         instructions = data.instructions;
         showInstructions.innerHTML = marked.parse(instructions);
@@ -163,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let result = eval(`${functioName}(shapes);`);
 
                 axios.post('/api/check-answer', {
+                    puzzleId,
                     answer: result,
                     dataset: shapes
                 }).then(function (result) {
@@ -181,13 +184,13 @@ document.addEventListener("DOMContentLoaded", function () {
         
         function handleHashChange(hash) {
             const parts = hash.split("/");
-            const id = parts[parts.length - 1];
+            const puzzleId = parts[parts.length - 1];
 
-            axios.get(`/api/puzzle/${id}`)
+            axios.get(`/api/puzzle/${puzzleId}`)
                 .then(function(result){
                     
                     const data = result.data;
-                    setPuzzleData(data)
+                    setPuzzleData({...data, puzzleId})
 
                     //todo - show message that new puzzle was loaded...
 

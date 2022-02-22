@@ -1,11 +1,11 @@
-function ApiRoutes(taskService) {
+function ApiRoutes(puzzleCheckerService) {
     async function checkAnswer(req, res) {
 
         const {
-            taskId, answer, dataset, uid
+            puzzleId, answer, dataset, uid
         } = req.body;
 
-        const result = await taskService.checkTask({ answer, dataset });
+        const result = await puzzleCheckerService.check({puzzleId, answer, dataset });
 
         res.json(result);
     }

@@ -1,20 +1,25 @@
+const { PuzzleService } = require("./PuzzleService");
+
 module.exports = function PuzzleRoutes(pool) {
+
+  const puzzleService = PuzzleService(pool);
+
   async function getPuzzle(req, res) {
     const { id } = req.params;
-
-    const sql = `select * from puzzle where id = $1`;
-
-    const result = await pool.query(sql, [id]);
-	let puzzle = {};
-    if (result.rowCount > 0) {
-       puzzle = result.rows[0];
-    }
-
+    const puzzle = await puzzleService.getPuzzle(id)
     return res.send(puzzle);
+  }
 
+  async function getPuzzles(req, res) {
+    const puzzles = await puzzleService.getPuzzles()
+    // return res.render("puzzles", {puzzles});
+    res.send({
+      puzzles
+    })
   }
 
   return {
-    getPuzzle
+    getPuzzle,
+    getPuzzles
   };
 }
