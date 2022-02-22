@@ -1,0 +1,49 @@
+<h1>Add puzzle</h1>
+
+<form action="/puzzles" method="post">
+
+	<div class="field">
+		<label for="function_name">Function name</label>
+		<input type="text" name="function_name" id="function_name">
+	</div>
+	<div class="field">
+		<label for="">Instructions</label>
+		{{!-- <input type="text" name="instructions" id=""> --}}
+		<textarea name="instructions" id="instructions" cols="30" rows="10"></textarea>
+	</div>
+	<div class="field">
+		<label for="">SQL</label>
+		{{!-- <input type="text" name="instructions" id=""> --}}
+		<textarea name="sql" id="sql" cols="30" rows="10"></textarea>
+	</div>
+
+	<div class="field">
+		<label for="">Parameters</label>
+		<input type="text" name="parameters" id="">
+	</div>
+
+	<div class="field m1">
+		<input class="p1" type="submit" value="Add puzzle">
+	</div>
+
+</form>
+
+<script>
+
+	var instructions = document.querySelector("#instructions");
+	var editor = CodeMirror.fromTextArea(instructions, {
+		lineNumbers: true,
+		matchBrackets: true,
+		mode: 'markdown',
+		theme: 'monokai'
+	});
+
+	var sql = document.querySelector("#sql");
+	var editor = CodeMirror.fromTextArea(sql, {
+		lineNumbers: true,
+		matchBrackets: true,
+		mode: 'sql',
+		theme: 'monokai'
+	});
+
+</script>

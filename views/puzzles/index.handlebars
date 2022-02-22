@@ -1,0 +1,24 @@
+<h1>Puzzles</h1>
+
+<a class="" href="/puzzles/add">Add puzzle</a>
+
+<table>
+	<tr>
+		<th>Function name</th>
+		<th>Instructions</th>
+		<th></th>
+	</tr>
+	{{#each puzzles}}
+	<tr>
+		<td>
+			{{function_name}}
+		</td>
+		<td>
+			{{{html}}}
+		</td>
+		<td>
+			<a href="/#/puzzle/{{id}}" >view</a>
+		</td>
+	</tr>
+	{{/each}}
+</table>

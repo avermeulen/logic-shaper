@@ -9,11 +9,18 @@ function PuzzleService(pool) {
       }
       return puzzle;
     },
-	async getPuzzles() {
-		const sql = `select * from puzzle order by id desc`;
-		const result = await pool.query(sql);
-		return result.rows;
-	  },
+    async addPuzzle({ instructions, function_name, sql, parameters }) {
+      const addPuzzleSQL = `insert into puzzle (instructions, function_name, sql, params) 
+        values ($1, $2, $3, $4)`;
+
+      await pool.query(addPuzzleSQL, [instructions, function_name, sql, parameters]);
+
+    },
+    async getPuzzles() {
+      const sql = `select * from puzzle order by id desc`;
+      const result = await pool.query(sql);
+      return result.rows;
+    },
   };
 }
 exports.PuzzleService = PuzzleService;

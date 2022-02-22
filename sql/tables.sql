@@ -16,5 +16,4 @@ create table IF NOT EXISTS puzzle(
 	params text,
 	active bool default true,
 	level text
-
 );

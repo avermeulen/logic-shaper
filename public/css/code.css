@@ -154,3 +154,29 @@ button {
   margin-left: -0.10em;
   text-align: center;
 }
+
+
+.field label {
+  /* width: 12em; */
+  margin-left: 1em;
+
+  display: block;
+  font-weight: bold;
+}
+
+.field input[type='text'], 
+.field textarea  {
+  /* display: inline-block; */
+  /* background-color: aqua; */
+  /* text-align :start; */
+  margin: 1em;
+  padding: 0.5em;
+}
+
+.m1 {
+  margin: 1em;
+}
+
+.p1 {
+  padding: 1em;
+}
