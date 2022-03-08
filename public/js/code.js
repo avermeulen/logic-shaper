@@ -59,154 +59,158 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    var db = openDatabase('logic_shaper', '1.0', 'Test DB', 2 * 1024 * 1024);
 
-    db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS shape (type, color, size, number)');
+    shapes = createShapes();
+    const notAllowed = ['.filter', '.map', '.find'];
+
+    let refreshButton = document.querySelector('.refresh');
+    refreshButton.addEventListener('click', function () {
+        shapes = createShapes();
     });
 
-    function storeShape(shape) {
-        const sql = `insert into shape (type, color, size, number) values (?,?,?,?)`;
+    let executeButton = document.querySelector('.execute');
+    // let code = document.querySelector('.code');
 
-        db.transaction(function (tx) {
-            tx.executeSql(sql, [shape.type, shape.color, shape.size, shape.number]);
-        });
+    var codeTextArea = document.querySelector(".code");
+    var editor = CodeMirror.fromTextArea(codeTextArea, {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: 'javascript',
+        theme: 'monokai'
+    });
+
+    const storedCode = localStorage['code'];
+    editor.getDoc().setValue(storedCode ? storedCode : '');
+
+    // editor.on('change', function() {
+    //     const notAllowedFunctionsUsed = notAllowed.some((n) => theCode.indexOf(n) !== -1 );
+    //     if (notAllowedFunctionsUsed) {
+    //         //executeButton.attributes.add('disabled');
+    //     }
+    //     else {
+    //         // executeButton.attributes.remove('disabled');
+    //     }
+    // })
+
+    // let instructionText = document.querySelector(".instructionText");
+    let showInstructions = document.querySelector('.showInstructions');
+
+
+    // let instructionsEditor = CodeMirror.fromTextArea(instructionText, {
+    //     lineNumbers: true,
+    //     matchBrackets: true,
+    //     mode: 'markdown',
+    //     theme: 'monokai'
+    // });
+
+    // showInstructions.addEventListener('click', function () {
+    //     //shapes = createShapes();
+    //     showInstructions.innerHTML = marked(instructionsEditor.getValue());
+    // });
+
+
+    let showButton = document.querySelector('.show');
+
+
+    var consoleArea = document.querySelector('.console');
+
+    console.log = function (msg) {
+        consoleArea.innerHTML = JSON.stringify(msg);
     }
 
+    executeButton.addEventListener('click', function () {
 
-    // document.addEventListener('DOMContentLoaded', function () {
-        //
-        shapes = createShapes();
-        const notAllowed = ['.filter', '.map', '.find'];
+        try {
+            let theCode = editor.getValue();
+            eval(theCode);
 
-        let refreshButton = document.querySelector('.refresh');
-        refreshButton.addEventListener('click', function () {
-            shapes = createShapes();
-        });
+            localStorage['code'] = theCode;
 
-        let executeButton = document.querySelector('.execute');
-        // let code = document.querySelector('.code');
+            // let shapes = document.querySelectorAll('.shape');
 
-        var codeTextArea = document.querySelector(".code");
-        var editor = CodeMirror.fromTextArea(codeTextArea, {
-            lineNumbers: true,
-            matchBrackets: true,
-            mode: 'javascript',
-            theme: 'monokai'
-        });
+            // if (notAllowedFunctionsUsed) {
+            //     alert("You not allowed to use the " + notAllowed.join(', ') + " functions.")
+            // }
 
-        const storedCode = localStorage['code'];
-        editor.getDoc().setValue(storedCode ? storedCode : '');
+            // shapes = Array.from(shapes).map(e => {
+            //     return {
+            //           shape: e.classList[1],
+            //         color: e.classList[2]
+            //     };
+            //   });
 
 
-        // editor.on('change', function() {
-        //     const notAllowedFunctionsUsed = notAllowed.some((n) => theCode.indexOf(n) !== -1 );
-        //     if (notAllowedFunctionsUsed) {
-        //         //executeButton.attributes.add('disabled');
-        //     }
-        //     else {
-        //         // executeButton.attributes.remove('disabled');
-        //     }
-        // })
-
-        // let instructionText = document.querySelector(".instructionText");
-        let showInstructions = document.querySelector('.showInstructions');
+            // console.log(shapes);
 
 
-        // let instructionsEditor = CodeMirror.fromTextArea(instructionText, {
-        //     lineNumbers: true,
-        //     matchBrackets: true,
-        //     mode: 'markdown',
-        //     theme: 'monokai'
-        // });
+            let result = eval(`${functioName}(shapes);`);
 
-        // showInstructions.addEventListener('click', function () {
-        //     //shapes = createShapes();
-        //     showInstructions.innerHTML = marked(instructionsEditor.getValue());
-        // });
+            // let submitCounter = 1;
+            // const submitInterval = setInterval(function(){
+            //     if (submitCounter == 3) {
+            //         clearInterval(submitInterval)
+            //     } else {
 
 
-        let showButton = document.querySelector('.show');
+            //         axios.post('/api/check-answer', {
+            //             puzzleId,
+            //             answer: result,
+            //             dataset: shapes
+            //         }).then(function (result) {
+            //             console.log(result.data);
+            //             submitCounter++;
+            //             shapes = createShapes();
+            //         }).catch(function (err) {
+            //             console.log(err);
+            //         });
+            //     }
+
+            // // shapes = createShapes();
+            // // shapes = createShapes();
+            // }, 1000)
 
 
-        var consoleArea = document.querySelector('.console');
-
-        console.log = function (msg) {
-            consoleArea.innerHTML = JSON.stringify(msg);
-        }
-
-        executeButton.addEventListener('click', function () {
-
-            try {
-                // alert(editor);
-                let theCode = editor.getValue();
-                eval(theCode);
-
-                localStorage['code'] = theCode;
-
-                // let shapes = document.querySelectorAll('.shape');
-
-
-                // if (notAllowedFunctionsUsed) {
-                //     alert("You not allowed to use the " + notAllowed.join(', ') + " functions.")
-                // }
-
-                // shapes = Array.from(shapes).map(e => {
-                //     return {
-                //           shape: e.classList[1],
-                //         color: e.classList[2]
-                //     };
-                //   });
-
-
-                // console.log(shapes);
-
-
-                let result = eval(`${functioName}(shapes);`);
-
-                axios.post('/api/check-answer', {
-                    puzzleId,
-                    answer: result,
-                    dataset: shapes
-                }).then(function (result) {
-                    console.log(result.data);
-                }).catch(function (err) {
-                    console.log(err);
-                });
-
-            }
-            catch (err) {
-                console.log(err.stack);
-            }
-
-        });
-
-        
-        function handleHashChange(hash) {
-            const parts = hash.split("/");
-            const puzzleId = parts[parts.length - 1];
-
-            axios.get(`/api/puzzle/${puzzleId}`)
-                .then(function(result){
-                    
-                    const data = result.data;
-                    setPuzzleData({...data, puzzleId})
-
-                    //todo - show message that new puzzle was loaded...
-
-
-                });
-
+            axios.post('/api/check-answer', {
+                puzzleId,
+                answer: result,
+                dataset: shapes
+            }).then(function (result) {
+                console.log(result.data);
+                // submitCounter++;
+                // shapes = createShapes();
+            }).catch(function (err) {
+                console.log(err);
+            });
 
         }
+        catch (err) {
+            console.log(err.stack);
+        }
 
-        window.addEventListener("hashchange", function (e) {
-            // console.log(window.location.hash);
-            handleHashChange(window.location.hash)
-        });
-    
-        // console.log(window.location.hash);
+    });
+
+
+    function handleHashChange(hash) {
+        const parts = hash.split("/");
+        const puzzleId = parts[parts.length - 1];
+
+        axios.get(`/api/puzzle/${puzzleId}`)
+            .then(function (result) {
+
+                const data = result.data;
+                setPuzzleData({ ...data, puzzleId })
+
+                //todo - show message that new puzzle was loaded...
+
+            });
+    }
+
+    window.addEventListener("hashchange", function (e) {
         handleHashChange(window.location.hash)
-    
+    });
+
+    // console.log(window.location.hash);
+    handleHashChange(window.location.hash)
+
 });
 

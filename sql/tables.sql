@@ -7,7 +7,7 @@ create table IF NOT EXISTS shape(
 	the_number int
 );
 
-drop table puzzle;
+-- drop table puzzle;
 create table IF NOT EXISTS puzzle(
 	id serial PRIMARY KEY,
 	function_name text not null,
